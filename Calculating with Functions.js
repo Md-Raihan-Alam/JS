@@ -1,20 +1,9 @@
-var n = function(digit) {
-  return function(op) {
-    return op ? op(digit) : digit;
-  }
-};
-var zero = n(0);
-var one = n(1);
-var two = n(2);
-var three = n(3);
-var four = n(4);
-var five = n(5);
-var six = n(6);
-var seven = n(7);
-var eight = n(8);
-var nine = n(9);
+['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+.forEach(function (name, n) {
+  this[name] = function (f) { return f ? f(n) : n }
+});
 
-function plus(r) { return function(l) { return l + r; }; }
-function minus(r) { return function(l) { return l - r; }; }
-function times(r) { return function(l) { return l * r; }; }
-function dividedBy(r) { return function(l) { return l / r; }; }
+function plus(n)      { return function (a) { return a + n } }
+function minus(n)     { return function (a) { return a - n } }
+function times(n)     { return function (a) { return a * n } }
+function dividedBy(n) { return function (a) { return Math.floor(a / n) } }
