@@ -1,12 +1,12 @@
-function nouveau (Constructor,...data) {
-    let obj={};
-    Object.setPrototypeOf(
-        obj,
-        Constructor.prototype
-    );
-    let res=Constructor.call(obj,...data);
-    if(res !==null && typeof res==='object'){
-        return res;
+///Read this->https://stackoverflow.com/questions/1646698/what-is-the-new-keyword-in-javascript
+function nouveau(func) {
+    var res = {};
+    if (func.prototype !== null) {
+        res.__proto__ = func.prototype;
     }
-    return obj;
+    var ret = func.apply(res, Array.prototype.slice.call(arguments, 1));
+    if ((typeof ret === "object" || typeof ret === "function") && ret !== null) {
+        return ret;
+    }
+    return res;
 }
