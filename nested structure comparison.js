@@ -1,11 +1,16 @@
-//check the string to number first, you failed
-    // Return 'true' if and only if 'other' has the same
-    // nesting structure as 'this'.
-
-    // Note: You are given a function isArray(o) that returns
-    // whether its argument is an array.
 Array.prototype.sameStructureAs = function (other) {
-    if(Array.isArray(other)===false) return false;
-    console.log(this.length);
-    console.log(other.length);
+    if (!Array.isArray(other) || this.length != other.length)
+      return false;
+
+    for(var i = 0; i < this.length; ++i) {
+      if (Array.isArray(this[i])) {
+        if (!this[i].sameStructureAs(other[i])) {
+          return false;
+        }
+      } else if (Array.isArray(other[i])) {
+        return false;
+      }
+    }
+    
+    return true;
 };
